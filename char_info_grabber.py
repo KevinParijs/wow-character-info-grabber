@@ -19,6 +19,9 @@ def generate_access_token():
         'Content-Type': 'application/x-www-form-urlencoded',
     }
 
+    print(f"Client_ID: {client_id}")
+    print(f"Client_secret: {client_secret}")
+
     # Include client ID and client secret in the request
     auth = (client_id, client_secret)
 
