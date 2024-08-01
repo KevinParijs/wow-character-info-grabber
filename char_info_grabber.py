@@ -1,81 +1,116 @@
 import requests
 import csv
 import os
+from datetime import datetime
 
-# Create client on https://develop.battle.net/access/clients and create 2 enviroment variables with your client_id & client_secret
+# Create client on https://develop.battle.net/access/clients and create 2 environment variables with your client_id & client_secret
 client_id = os.environ.get('bnet_client_id')
 client_secret = os.environ.get('bnet_client_secret')
 
 url = 'https://eu.battle.net/oauth/token'
 
 def generate_access_token():
-    # Prepare the data to be sent in the request body
+    if not client_id or not client_secret:
+        print("Error: Missing client_id or client_secret in environment variables.")
+        return None
+
     data = {
         'grant_type': 'client_credentials'
     }
 
-    # Include client ID and client secret in the request headers
     headers = {
         'Content-Type': 'application/x-www-form-urlencoded',
     }
 
-    print(f"Client_ID: {client_id}")
-    print(f"Client_secret: {client_secret}")
-
-    # Include client ID and client secret in the request
     auth = (client_id, client_secret)
 
-    # Make the request
     response = requests.post(url, data=data, headers=headers, auth=auth)
 
-    # Check response status code
     if response.status_code == 200:
         data = response.json()
-        # Extract and print the access token
         access_token = data['access_token']
-        print("Access Token:", access_token)
         return access_token
     else:
-        print("Error:", response.status_code)
+        print("Error:", response.status_code, response.json())
+        return None
 
-
-# Function to retrieve player item level
 def get_player_item_level(player_name, realm, region, api_key):
     url = f"https://{region}.api.blizzard.com/profile/wow/character/{realm.lower()}/{player_name.lower()}?namespace=profile-{region}&locale=en_GB&access_token={api_key}"
-    #print(f"Sending request to: {url}")
     response = requests.get(url)
     if response.status_code == 200:
         data = response.json()
-        #print(data)
-        # Iterate through equipment slots to find item level
-        item_lvl = data['equipped_item_level']
-        return item_lvl
+        item_lvl = data.get('equipped_item_level', 'N/A')
+        char_lvl = data.get('level', 'N/A')
+        char_faction = data.get('faction', {}).get('name', 'N/A')
+        char_specc = data.get('active_spec', {}).get('name', 'N/A')
+        char_race = data.get('race', {}).get('name', 'N/A')
+        return item_lvl, char_lvl, char_faction, char_specc, char_race
     else:
-        return "Player not found or error in API request"
+        return None, None, None
 
-# Read CSV file
 def read_csv(file_path):
     player_info = []
-    with open(file_path, 'r', encoding="utf-8") as file:
-        reader = csv.DictReader(file)
-        for row in reader:
-            player_info.append(row)
+    try:
+        with open(file_path, 'r', encoding="utf-8") as file:
+            reader = csv.DictReader(file)
+            for row in reader:
+                player_info.append(row)
+    except FileNotFoundError:
+        print(f"Error: File not found - {file_path}")
     return player_info
 
-def main():
-    # Read API key from a file or from environment variable
-    region = "eu"  # Change this to your region
+def write_csv(file_path, data):
+    fieldnames = ['player_name', 'realm', 'class', 'item_level', 'level', 'faction', 'creation_datetime']
+    try:
+        with open(file_path, 'w', newline='', encoding="utf-8") as file:
+            writer = csv.DictWriter(file, fieldnames=fieldnames)
+            writer.writeheader()
+            for row in data:
+                writer.writerow(row)
+        print(f"Data successfully written to {file_path}")
+    except Exception as e:
+        print(f"Error writing to CSV file: {e}")
 
+def main():
+    region = "eu"  # Change this to your region
     access_token = generate_access_token()
-    
-    players = read_csv("heroic-roster.csv")  # Path to your CSV file
+
+    if not access_token:
+        return
+
+    players = read_csv("input/tww-uproar.csv")  # Path to your CSV file
+    if not players:
+        return
+
+    player_data = []
+
     for player in players:
         player_name = player['player_name']
         realm = player['realm']
         realm_cleaned = realm.replace("'", "").replace(" ", "-")
         player_class = player['class']
-        item_level = get_player_item_level(player_name, realm_cleaned, region, access_token)
-        print(f"Player: {player_name}, Realm: {realm_cleaned}, Class: {player_class}, Item Level: {item_level}")
+        
+        if player_class != 'TBD':
+            item_level, char_lvl, char_faction, char_specc, char_race = get_player_item_level(player_name, realm_cleaned, region, access_token)
+            if item_level is not None:
+                print(f"Player: {player_name}, Realm: {realm_cleaned}, Class: {player_class}, Item Level: {item_level}, Level: {char_lvl}, Faction: {char_faction}, Spec: {char_specc}, Race: {char_race}")
+                player_data.append({
+                    'player_name': player_name,
+                    'realm': realm_cleaned,
+                    'class': player_class,
+                    'item_level': item_level,
+                    'level': char_lvl,
+                    'faction': char_faction,
+                    'creation_datetime': datetime.today()
+                })
+            else:
+                print(f"Error fetching data for Player: {player_name}, Realm: {realm_cleaned}")
+        else:
+            print(f"Player: {player_name}, Realm: {realm_cleaned}, Class: {player_class}, This player did not choose his/her class yet or the char. name is incorrect")
+
+    output_file_path = "output/player_data.csv"  # Path to your output CSV file
+    write_csv(output_file_path, player_data)
+    print('Output file created!')
 
 if __name__ == "__main__":
     main()
