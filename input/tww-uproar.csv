@@ -1,28 +1,28 @@
-player_name,realm,class
-Kixdk,Stormscale,Death Knight
-Sabus,Stormscale,TBD
-Jadee,Stormscale,Druid
-Mikdiff,Stormscale,Paladin
-Julian,Stormscale,TBD
-Naraaya,Draenor,Paladin
-Spekkies,Stormscale,Shaman
-Lozoot,Stormscale,Evoker
-Salmena,Twilight's Hammer,Hunter
-Respite,Bloodhoof,TBD
-Endorielle,Stormscale,Mage
-Kyotetsu,Stormscale,Demon Hunter
-Seeddy,Stormscale,Mage
-Nravitsya,Stormscale,Hunter
-Drexyl,Stormscale,Warlock
-Khaelitha,Stormscale,Warlock
-Magnushunter,Stormscale,Hunter
-Tom,Stormscale,TBD
-Córdula,Stormscale,Death Knight
-Mattdeamon,Stormscale,Warlock
-Karadin,Stormscale,Paladin
-Artix,Stormscale,Paladin
-Thirtysix,Stormscale,TBD
-Macamonk,Stormscale,Monk
-Màzè,Stormscale,Warrior
-Marko,Stormscale,TBD
-Skausyskaus,Draenor,Priest
+player_name,realm,class,role
+Kixdk,Stormscale,Death Knight,Tank
+Sabus,Stormscale,TBD,Tank
+Jadee,Stormscale,Druid,Healer
+Mikdiff,Stormscale,Paladin,Healer
+Julian,Stormscale,TBD,Healer
+Naraaya,Draenor,Paladin,Healer
+Spekkies,Stormscale,Shaman,Healer
+Lozoot,Stormscale,Evoker,DPS
+Salmena,Twilight's Hammer,Hunter,DPS
+Respite,Bloodhoof,TBD,DPS
+Endorielle,Stormscale,Mage,DPS
+Kyotetsu,Stormscale,Demon Hunter,DPS
+Seeddy,Stormscale,Mage,DPS
+Nravitsya,Stormscale,Hunter,DPS
+Drexyl,Stormscale,Warlock,DPS
+Khaelitha,Stormscale,Warlock,DPS
+Magnushunter,Stormscale,Hunter,DPS
+Tom,Stormscale,TBD,DPS
+Córdula,Stormscale,Death Knight,DPS
+Mattdeamon,Stormscale,Warlock,DPS
+Karadin,Stormscale,Paladin,DPS
+Artix,Stormscale,Paladin,DPS
+Thirtysix,Stormscale,TBD,DPS
+Macamonk,Stormscale,Monk,DPS
+Màzè,Stormscale,Warrior,DPS
+Marko,Stormscale,TBD,DPS
+Skausyskaus,Draenor,Priest,DPS

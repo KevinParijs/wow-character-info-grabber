@@ -60,14 +60,17 @@ def read_csv(file_path):
     return player_info
 
 def write_csv(file_path, data):
-    fieldnames = ['player_name', 'realm', 'class', 'item_level', 'level', 'faction', 'creation_datetime']
+    fieldnames = ['player_name', 'realm', 'class', 'item_level', 'level', 'faction', 'role', 'creation_datetime']
+    file_exists = os.path.isfile(file_path)
+
     try:
-        with open(file_path, 'w', newline='', encoding="utf-8") as file:
+        with open(file_path, 'a', newline='', encoding="utf-8") as file:
             writer = csv.DictWriter(file, fieldnames=fieldnames)
-            writer.writeheader()
+            if not file_exists:
+                writer.writeheader()  # Only write the header if the file doesn't exist
             for row in data:
                 writer.writerow(row)
-        print(f"Data successfully written to {file_path}")
+        print(f"Data successfully appended to {file_path}")
     except Exception as e:
         print(f"Error writing to CSV file: {e}")
 
@@ -89,11 +92,12 @@ def main():
         realm = player['realm']
         realm_cleaned = realm.replace("'", "").replace(" ", "-")
         player_class = player['class']
+        player_role = player['role']
         
         if player_class != 'TBD':
             item_level, char_lvl, char_faction, char_specc, char_race = get_player_item_level(player_name, realm_cleaned, region, access_token)
             if item_level is not None:
-                print(f"Player: {player_name}, Realm: {realm_cleaned}, Class: {player_class}, Item Level: {item_level}, Level: {char_lvl}, Faction: {char_faction}, Spec: {char_specc}, Race: {char_race}")
+                print(f"Player: {player_name}, Realm: {realm_cleaned}, Class: {player_class}, Item Level: {item_level}, Level: {char_lvl}, Faction: {char_faction}, Spec: {char_specc}, Race: {char_race}, Role: {player_role}")
                 player_data.append({
                     'player_name': player_name,
                     'realm': realm_cleaned,
@@ -101,12 +105,13 @@ def main():
                     'item_level': item_level,
                     'level': char_lvl,
                     'faction': char_faction,
+                    'role': player_role,
                     'creation_datetime': datetime.today()
                 })
             else:
                 print(f"Error fetching data for Player: {player_name}, Realm: {realm_cleaned}")
         else:
-            print(f"Player: {player_name}, Realm: {realm_cleaned}, Class: {player_class}, This player did not choose his/her class yet or the char. name is incorrect")
+            print(f"Player: {player_name}, Realm: {realm_cleaned}, Class: {player_class}, Role: {player_role}, This player did not choose his/her class yet or the char. name is incorrect")
 
     output_file_path = "output/player_data.csv"  # Path to your output CSV file
     write_csv(output_file_path, player_data)
