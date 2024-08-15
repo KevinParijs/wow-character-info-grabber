@@ -36,6 +36,7 @@ def generate_access_token():
 
 def get_player_item_level(player_name, realm, region, api_key):
     url = f"https://{region}.api.blizzard.com/profile/wow/character/{realm.lower()}/{player_name.lower()}?namespace=profile-{region}&locale=en_GB&access_token={api_key}"
+    print(url)
     response = requests.get(url)
     if response.status_code == 200:
         data = response.json()
@@ -60,7 +61,7 @@ def read_csv(file_path):
     return player_info
 
 def write_csv(file_path, data):
-    fieldnames = ['player_name', 'realm', 'class', 'item_level', 'level', 'faction', 'role', 'creation_datetime']
+    fieldnames = ['player_name', 'realm', 'class', 'item_level', 'level', 'faction', 'role', 'specialisation', 'race', 'creation_datetime']
     file_exists = os.path.isfile(file_path)
 
     try:
@@ -97,6 +98,8 @@ def main():
         item_level = 0
         char_lvl = 70
         char_faction = 'Panda'
+        char_specc = 'TBD'
+        char_race = 'TBD'
 
         if player_class != 'TBD':
             item_level, char_lvl, char_faction, char_specc, char_race = get_player_item_level(player_name, realm_cleaned, region, access_token)
@@ -115,6 +118,8 @@ def main():
             'level': char_lvl,
             'faction': char_faction,
             'role': player_role,
+            'specialisation': char_specc,
+            'race': char_race,
             'creation_datetime': datetime.today()
         })
 

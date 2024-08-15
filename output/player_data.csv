@@ -1,55 +1,55 @@
-player_name,realm,class,item_level,level,faction,role,creation_datetime
-Kixdk,Stormscale,Death Knight,492,70,Horde,Tank,2024-08-01 22:42:35.661721
-Sabus,Stormscale,TBD,0,70,Panda,Tank,2024-08-01 22:42:35.662720
-Jadee,Stormscale,Druid,506,70,Horde,Healer,2024-08-01 22:42:35.991537
-Mikdiff,Stormscale,Paladin,523,70,Horde,Healer,2024-08-01 22:42:36.334360
-Julian,Stormscale,TBD,0,70,Panda,Healer,2024-08-01 22:42:36.334440
-Naraaya,Draenor,Paladin,491,70,Horde,Healer,2024-08-01 22:42:36.671569
-Spekkies,Stormscale,Shaman,527,70,Horde,Healer,2024-08-01 22:42:37.003457
-Lozoot,Stormscale,Evoker,511,70,Alliance,DPS,2024-08-01 22:42:37.339094
-Salmena,Twilights-Hammer,Hunter,518,70,Alliance,DPS,2024-08-01 22:42:37.683664
-Respite,Bloodhoof,TBD,0,70,Panda,DPS,2024-08-01 22:42:37.683664
-Endorielle,Stormscale,Mage,469,70,Horde,DPS,2024-08-01 22:42:38.034118
-Kyotetsu,Stormscale,Demon Hunter,521,70,Horde,DPS,2024-08-01 22:42:38.373035
-Seeddy,Stormscale,Mage,477,70,Horde,DPS,2024-08-01 22:42:38.695417
-Nravitsya,Stormscale,Hunter,488,70,Horde,DPS,2024-08-01 22:42:39.060884
-Drexyl,Stormscale,Warlock,517,70,Alliance,DPS,2024-08-01 22:42:39.427288
-Khaelitha,Stormscale,Warlock,524,70,Horde,DPS,2024-08-01 22:42:39.769443
-Magnushunter,Stormscale,Hunter,518,70,Horde,DPS,2024-08-01 22:42:40.114499
-Tom,Stormscale,TBD,0,70,Panda,DPS,2024-08-01 22:42:40.114499
-Córdula,Stormscale,Death Knight,511,70,Alliance,DPS,2024-08-01 22:42:40.490953
-Mattdeamon,Stormscale,Warlock,516,70,Horde,DPS,2024-08-01 22:42:40.846837
-Karadin,Stormscale,Paladin,519,70,Alliance,DPS,2024-08-01 22:42:41.167312
-Artix,Stormscale,Paladin,486,70,Horde,DPS,2024-08-01 22:42:41.532008
-Thirtysix,Stormscale,TBD,0,70,Panda,DPS,2024-08-01 22:42:41.532008
-Macamonk,Stormscale,Monk,503,70,Horde,DPS,2024-08-01 22:42:41.886414
-Màzè,Stormscale,Warrior,512,70,Horde,DPS,2024-08-01 22:42:42.208034
-Marko,Stormscale,TBD,0,70,Panda,DPS,2024-08-01 22:42:42.208034
-Skausyskaus,Draenor,Priest,449,70,Horde,DPS,2024-08-01 22:42:42.537542
-Kixdk,Stormscale,Death Knight,492,70,Horde,Tank,2024-08-02 21:20:14.098130
-Sabus,Stormscale,TBD,0,70,Panda,Tank,2024-08-02 21:20:14.098130
-Jadee,Stormscale,Druid,506,70,Horde,Healer,2024-08-02 21:20:14.487781
-Mikdiff,Stormscale,Paladin,523,70,Horde,Healer,2024-08-02 21:20:14.849077
-Julian,Stormscale,TBD,0,70,Panda,Healer,2024-08-02 21:20:14.849077
-Naraaya,Draenor,Paladin,491,70,Horde,Healer,2024-08-02 21:20:15.210485
-Spekkies,Stormscale,Shaman,527,70,Horde,Healer,2024-08-02 21:20:15.564017
-Lozoot,Stormscale,Evoker,511,70,Alliance,DPS,2024-08-02 21:20:15.943135
-Salmena,Twilights-Hammer,Hunter,518,70,Alliance,DPS,2024-08-02 21:20:16.331542
-Respite,Bloodhoof,TBD,0,70,Panda,DPS,2024-08-02 21:20:16.331542
-Endorielle,Stormscale,Mage,469,70,Horde,DPS,2024-08-02 21:20:16.696444
-Kyotetsu,Stormscale,Demon Hunter,521,70,Horde,DPS,2024-08-02 21:20:17.061916
-Seeddy,Stormscale,Mage,477,70,Horde,DPS,2024-08-02 21:20:17.446195
-Nravitsya,Stormscale,Hunter,488,70,Horde,DPS,2024-08-02 21:20:17.842406
-Drexyl,Stormscale,Warlock,517,70,Alliance,DPS,2024-08-02 21:20:18.202940
-Khaelitha,Stormscale,Warlock,524,70,Horde,DPS,2024-08-02 21:20:18.589307
-Magnushunter,Stormscale,Hunter,518,70,Horde,DPS,2024-08-02 21:20:19.002387
-Tom,Stormscale,TBD,0,70,Panda,DPS,2024-08-02 21:20:19.002387
-Córdula,Stormscale,Death Knight,511,70,Alliance,DPS,2024-08-02 21:20:19.355077
-Mattdeamon,Stormscale,Warlock,516,70,Horde,DPS,2024-08-02 21:20:19.708769
-Karadin,Stormscale,Paladin,519,70,Alliance,DPS,2024-08-02 21:20:20.059913
-Artix,Stormscale,Paladin,486,70,Horde,DPS,2024-08-02 21:20:20.420702
-Thirtysix,Stormscale,TBD,0,70,Panda,DPS,2024-08-02 21:20:20.420702
-Macamonk,Stormscale,Monk,503,70,Horde,DPS,2024-08-02 21:20:20.837446
-Màzè,Stormscale,Warrior,512,70,Horde,DPS,2024-08-02 21:20:21.215490
-Marko,Stormscale,TBD,0,70,Panda,DPS,2024-08-02 21:20:21.215490
-Skausyskaus,Draenor,Priest,449,70,Horde,DPS,2024-08-02 21:20:21.574647
+player_name,realm,class,item_level,level,faction,role,specialisation,race,creation_datetime
+Kixdk,Stormscale,Death Knight,492,70,Horde,Tank,Blood,Blood Elf,2024-08-02 21:28:38.833706
+Sabus,Stormscale,TBD,0,70,Panda,Tank,TBD,TBD,2024-08-02 21:28:38.833706
+Jadee,Stormscale,Druid,506,70,Horde,Healer,Restoration,Troll,2024-08-02 21:28:39.136209
+Mikdiff,Stormscale,Paladin,523,70,Horde,Healer,Holy,Blood Elf,2024-08-02 21:28:39.600246
+Julian,Stormscale,TBD,0,70,Panda,Healer,TBD,TBD,2024-08-02 21:28:39.600246
+Naraaya,Draenor,Paladin,491,70,Horde,Healer,Holy,Blood Elf,2024-08-02 21:28:39.928798
+Spekkies,Stormscale,Shaman,527,70,Horde,Healer,Restoration,Orc,2024-08-02 21:28:40.273177
+Lozoot,Stormscale,Evoker,511,70,Alliance,DPS,Devastation,Dracthyr,2024-08-02 21:28:40.601911
+Salmena,Twilights-Hammer,Hunter,518,70,Alliance,DPS,Marksmanship,Night Elf,2024-08-02 21:28:40.975879
+Respite,Bloodhoof,TBD,0,70,Panda,DPS,TBD,TBD,2024-08-02 21:28:40.975879
+Endorielle,Stormscale,Mage,469,70,Horde,DPS,Frost,Blood Elf,2024-08-02 21:28:41.304936
+Kyotetsu,Stormscale,Demon Hunter,521,70,Horde,DPS,Havoc,Blood Elf,2024-08-02 21:28:41.630155
+Seeddy,Stormscale,Mage,477,70,Horde,DPS,Frost,Blood Elf,2024-08-02 21:28:41.966467
+Nravitsya,Stormscale,Hunter,488,70,Horde,DPS,Beast Mastery,Tauren,2024-08-02 21:28:42.290192
+Drexyl,Stormscale,Warlock,517,70,Alliance,DPS,Demonology,Void Elf,2024-08-02 21:28:42.637002
+Khaelitha,Stormscale,Warlock,524,70,Horde,DPS,Destruction,Orc,2024-08-02 21:28:42.943953
+Magnushunter,Stormscale,Hunter,518,70,Horde,DPS,Beast Mastery,Orc,2024-08-02 21:28:43.277789
+Tom,Stormscale,TBD,0,70,Panda,DPS,TBD,TBD,2024-08-02 21:28:43.277789
+Córdula,Stormscale,Death Knight,511,70,Alliance,DPS,Frost,Human,2024-08-02 21:28:43.587277
+Mattdeamon,Stormscale,Warlock,516,70,Horde,DPS,Demonology,Orc,2024-08-02 21:28:43.936285
+Karadin,Stormscale,Paladin,519,70,Alliance,DPS,Retribution,Human,2024-08-02 21:28:44.258995
+Artix,Stormscale,Paladin,486,70,Horde,DPS,Retribution,Blood Elf,2024-08-02 21:28:44.603909
+Thirtysix,Stormscale,TBD,0,70,Panda,DPS,TBD,TBD,2024-08-02 21:28:44.603909
+Macamonk,Stormscale,Monk,503,70,Horde,DPS,Windwalker,Pandaren,2024-08-02 21:28:44.933570
+Màzè,Stormscale,Warrior,512,70,Horde,DPS,Fury,Mag'har Orc,2024-08-02 21:28:45.268753
+Marko,Stormscale,TBD,0,70,Panda,DPS,TBD,TBD,2024-08-02 21:28:45.268753
+Skausyskaus,Draenor,Priest,449,70,Horde,DPS,Shadow,Troll,2024-08-02 21:28:45.605848
+Kixdk,Stormscale,Death Knight,492,70,Horde,Tank,Blood,Blood Elf,2024-08-14 18:14:08.741819
+Sabus,Stormscale,TBD,0,70,Panda,Tank,TBD,TBD,2024-08-14 18:14:08.741819
+Jadee,Stormscale,Druid,506,70,Horde,Healer,Restoration,Troll,2024-08-14 18:14:09.165352
+Mikdiff,Stormscale,Paladin,523,70,Horde,Healer,Holy,Blood Elf,2024-08-14 18:14:09.568979
+Julian,Stormscale,TBD,0,70,Panda,Healer,TBD,TBD,2024-08-14 18:14:09.568979
+Naraaya,Draenor,Paladin,493,70,Horde,Healer,Holy,Blood Elf,2024-08-14 18:14:09.934668
+Spekkies,Stormscale,Shaman,527,70,Horde,Healer,Restoration,Orc,2024-08-14 18:14:10.327588
+Lozoot,Stormscale,Evoker,512,70,Alliance,DPS,Devastation,Dracthyr,2024-08-14 18:14:10.726182
+Salmena,Twilights-Hammer,Hunter,519,70,Alliance,DPS,Marksmanship,Night Elf,2024-08-14 18:14:11.142313
+Respite,Bloodhoof,TBD,0,70,Panda,DPS,TBD,TBD,2024-08-14 18:14:11.142394
+Endorielle,Stormscale,Mage,483,70,Horde,DPS,Arcane,Blood Elf,2024-08-14 18:14:11.526174
+Kyotetsu,Stormscale,Demon Hunter,522,70,Horde,DPS,Havoc,Blood Elf,2024-08-14 18:14:11.904106
+Seeddy,Stormscale,Mage,480,70,Horde,DPS,Frost,Blood Elf,2024-08-14 18:14:12.280420
+Nravitsya,Stormscale,Hunter,488,70,Horde,DPS,Beast Mastery,Tauren,2024-08-14 18:14:12.688086
+Drexyl,Stormscale,Warlock,517,70,Alliance,DPS,Demonology,Void Elf,2024-08-14 18:14:13.064955
+Khaelitha,Stormscale,Warlock,524,70,Horde,DPS,Destruction,Orc,2024-08-14 18:14:13.557590
+Magnushunter,Stormscale,Hunter,518,70,Horde,DPS,Beast Mastery,Orc,2024-08-14 18:14:14.016154
+Tom,Stormscale,TBD,0,70,Panda,DPS,TBD,TBD,2024-08-14 18:14:14.016660
+Córdula,Stormscale,Death Knight,511,70,Alliance,DPS,Blood,Human,2024-08-14 18:14:14.400843
+Mattdeamon,Stormscale,Warlock,516,70,Horde,DPS,Demonology,Orc,2024-08-14 18:14:14.818254
+Karadin,Stormscale,Paladin,519,70,Alliance,DPS,Retribution,Human,2024-08-14 18:14:15.180033
+Artix,Stormscale,Paladin,486,70,Horde,DPS,Retribution,Blood Elf,2024-08-14 18:14:15.575772
+Thirtysix,Stormscale,TBD,0,70,Panda,DPS,TBD,TBD,2024-08-14 18:14:15.575772
+Macamonk,Stormscale,Monk,503,70,Horde,DPS,Windwalker,Pandaren,2024-08-14 18:14:15.949109
+Màzè,Stormscale,Warrior,512,70,Horde,DPS,Fury,Mag'har Orc,2024-08-14 18:14:16.333038
+Marko,Stormscale,TBD,0,70,Panda,DPS,TBD,TBD,2024-08-14 18:14:16.333038
+Skausyskaus,Draenor,Priest,490,70,Horde,DPS,Shadow,Troll,2024-08-14 18:14:16.700948
