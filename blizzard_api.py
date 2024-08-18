@@ -34,15 +34,51 @@ class BlizzardAPI:
         response = requests.get(url)
         if response.status_code == 200:
             data = response.json()
-            item_level = data.get('equipped_item_level', 'N/A')
-            char_lvl = data.get('level', 'N/A')
+            char_id = data.get('id')
+            item_level = data.get('equipped_item_level', '0')
+            char_lvl = data.get('level', '0')
             char_faction = data.get('faction', {}).get('name', 'N/A')
             char_specc = data.get('active_spec', {}).get('name', 'N/A')
             char_race = data.get('race', {}).get('name', 'N/A')
-            return item_level, char_lvl, char_faction, char_specc, char_race
+            return char_id, item_level, char_lvl, char_faction, char_specc, char_race
         else:
             print(f"Error fetching data for {player_name} on {realm}. Status code: {response.status_code}")
             return None, None, None, None, None
 
     def get_player_equipment(self, player_name, realm):
         url = f"https://{self.region}.api.blizzard.com/profile/wow/character/{realm.lower()}/{player_name.lower()}/equipment?namespace=profile-{self.region}&locale=en_GB&access_token={self.access_token}"
+
+        # https://eu.api.blizzard.com/profile/wow/character/stormscale/khaelitha/equipment?namespace=profile-eu&locale=en_GB&access_token=EURSlT35ZKzBIpYVAgIw6rq2VCEGUPjdE1
+        
+        response = requests.get(url)
+        if response.status_code ==200:
+            data = response.json()
+            # Complete this functionality
+        else:
+            print(f"Error fetching m+ score for {player_name} on realm {realm}. Status code: {response.status_code}")
+            return 0
+
+    def get_player_primary_professions(self, player_name, realm):
+        url = f"https://{self.region}.api.blizzard.com/profile/wow/character/{realm.lower()}/{player_name.lower()}/professions?namespace=profile-{self.region}&locale=en_GB&access_token={self.access_token}"
+
+        # https://eu.api.blizzard.com/profile/wow/character/stormscale/khaelitha/professions?namespace=profile-eu&locale=en_GB&access_token=EURSlT35ZKzBIpYVAgIw6rq2VCEGUPjdE1
+
+        response = requests.get(url)
+        if response.status_code ==200:
+            data = response.json()
+            # Complete this functionality
+        else:
+            print(f"Error fetching m+ score for {player_name} on realm {realm}. Status code: {response.status_code}")
+            return 0
+    
+    def get_player_mythic_keystone_rating(self, player_name, realm):
+        url = f"https://{self.region}.api.blizzard.com/profile/wow/character/{realm.lower()}/{player_name.lower()}/mythic-keystone-profile?namespace=profile-{self.region}&locale=en_GB&access_token={self.access_token}"
+
+        response = requests.get(url)
+        if response.status_code ==200:
+            data = response.json()
+            mythic_score = data.get('current_mythic_rating', {}).get('rating', '0')
+            return mythic_score
+        else:
+            print(f"Error fetching m+ score for {player_name} on realm {realm}. Status code: {response.status_code}")
+            return 0

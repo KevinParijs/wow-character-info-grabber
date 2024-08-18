@@ -16,7 +16,7 @@ class CSVHandler:
         return player_info
 
     def write_csv(self, file_path, data):
-        fieldnames = ['player_name', 'realm', 'class', 'item_level', 'level', 'faction', 'role', 'specialisation', 'race', 'creation_datetime']
+        fieldnames = ['char_id', 'player_name', 'realm', 'class', 'item_level', 'level', 'faction', 'role', 'specialisation', 'race', 'mythic_keystone_rating', 'creation_datetime']
         file_exists = os.path.isfile(file_path)
 
         try:

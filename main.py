@@ -2,6 +2,7 @@
 import requests
 import csv
 import os
+import hashlib
 from datetime import datetime
 
 from blizzard_api import BlizzardAPI
@@ -18,20 +19,26 @@ def player_info(api_client, db_handler):
 
     player_data = []
     for player in players:
-        p = Player(player['player_name'], player['realm'], player['class'], player['role'])
-        p.update_from_api(api_client)
-        player_data.append({
-            'player_name': p.player_name,
-            'realm': p.realm,
-            'class': p.player_class,
-            'item_level': p.item_level,
-            'level': p.level,
-            'faction': p.faction,
-            'role': p.role,
-            'specialisation': p.specialisation,
-            'race': p.race,
-            'creation_datetime': p.creation_datetime
-        })
+        try:
+            p = Player(player['player_name'], player['realm'], player['class'], player['role'])
+            p.update_from_api(api_client)
+            result = hashlib.md5(str(p.id).encode())
+            player_data.append({
+                'char_id': result.hexdigest(),
+                'player_name': p.player_name,
+                'realm': p.realm,
+                'class': p.player_class,
+                'item_level': p.item_level,
+                'level': p.level,
+                'faction': p.faction,
+                'role': p.role,
+                'specialisation': p.specialisation,
+                'race': p.race,
+                'mythic_keystone_rating': p.mythic_score,
+                'creation_datetime': p.creation_datetime
+            })
+        except:
+            print("An error occured during the API call for player name: "+ player['player_name'])
 
     # Write data to CSV
     output_file_path = "output/player_data.csv"
@@ -48,6 +55,8 @@ def player_items():
 
 def main():
     # Load environment variables
+    mariadb_user = os.environ.get('mariadb_syno_user')
+    mariadb_pwd = os.environ.get('mariadb_syno_pwd')
     client_id = os.environ.get('bnet_client_id')
     client_secret = os.environ.get('bnet_client_secret')
 
@@ -55,7 +64,7 @@ def main():
     api_client = BlizzardAPI(client_id, client_secret)
 
     # Grab player information
-    db_handler = DatabaseHandler(host='192.168.1.10', user='dbgrabber', password='DBgrabber123!', database='tww-data')
+    db_handler = DatabaseHandler(host='192.168.1.10', user=mariadb_user, password=mariadb_pwd, database='tww-data')
     player_info(api_client, db_handler)
     db_handler.close_connection()
 
