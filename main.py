@@ -11,6 +11,8 @@ from db_handler import DatabaseHandler
 from player import Player
 
 def player_info(api_client, db_handler):
+    run_id = datetime.today().strftime('%Y%m%d%H%M')
+
     # Read players from CSV
     csv_handler = CSVHandler()
     players = csv_handler.read_csv("input/tww-uproar.csv")
@@ -18,6 +20,7 @@ def player_info(api_client, db_handler):
         return
 
     player_data = []
+    player_equipment = []
     for player in players:
         try:
             p = Player(player['player_name'], player['realm'], player['class'], player['role'])
@@ -35,7 +38,12 @@ def player_info(api_client, db_handler):
                 'specialisation': p.specialisation,
                 'race': p.race,
                 'mythic_keystone_rating': p.mythic_score,
-                'creation_datetime': p.creation_datetime
+                'creation_datetime': p.creation_datetime,
+                'run_id': run_id
+            })
+            p.grab_player_equipment(api_client)
+            player_equipment.append({
+                'char_id': p.char_id
             })
         except:
             print("An error occured during the API call for player name: "+ player['player_name'])

@@ -53,7 +53,57 @@ class BlizzardAPI:
         response = requests.get(url)
         if response.status_code ==200:
             data = response.json()
-            # Complete this functionality
+            char_id = data.get('character', {}).get('id', '0')
+
+            equipment = []
+            for item in data.get('equipped_items', []):
+                item_info = {
+                    'item_id': item.get('item', {}).get('id'),
+                    'slot_name': item.get('slot', {}).get('name'),
+                    'quality_name': item.get('quality', {}).get('name'),
+                    'level_value': item.get('level', {}).get('value'),
+                    'item_name': item.get('name'),
+                    'name_description': item.get('name_description', {}).get('display_string', ''),
+                    'sockets': []
+                }
+
+                # Get socket information
+                for socket in item.get('sockets', []):
+                    socket_info = {
+                        'socket_type': socket.get('socket_type', {}).get('name'),
+                        'socket_item_name': socket.get('item', {}).get('name', ''),
+                        'socket_item_id': socket.get('item', {}).get('id', '0'),
+                        'socket_display_string': socket.get('display_string', '')
+                    }
+                    item_info['sockets'].append(socket_info)
+
+                equipment.append(item_info)
+
+            # Parse equipped item sets
+            item_sets = []
+            for item_set in data.get('equipped_item_sets', []):
+                set_info = {
+                    'item_set_id': item_set.get('item_set', {}).get('id', ''),
+                    'item_set_name': item_set.get('item_set', {}).get('name', ''),
+                    'items': []
+                }
+
+                for item in item_set.get('items', []):
+                    item_detail = {
+                        'item_id': item.get('item', {}).get(id, ''),
+                        'item_name': item.get('item', {}).get(name, ''),
+                        'is_equipped': item.get('is_equipped', False)
+                    }
+                    set_info['items'].append(item_detail)
+
+                item_sets.append(set_info)
+
+            # Return or store the structured data
+            return {
+                'character_id': char_id,
+                'equipment': equipment,
+                'item_sets': item_sets
+            }
         else:
             print(f"Error fetching m+ score for {player_name} on realm {realm}. Status code: {response.status_code}")
             return 0

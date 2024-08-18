@@ -36,8 +36,8 @@ class DatabaseHandler:
             cursor = self.connection.cursor()
             for row in data:
                 sql = """
-                INSERT INTO players (player_id, player_name, player_realm, player_class, item_level, level, faction, role, specialisation, race, mythic_keystone_score, creation_datetime)
-                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                INSERT INTO players (player_id, player_name, player_realm, player_class, item_level, level, faction, role, specialisation, race, mythic_keystone_score, creation_datetime, run_id)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
                 """
                 values = (
                     row['char_id'],
@@ -51,7 +51,8 @@ class DatabaseHandler:
                     row['specialisation'],
                     row['race'],
                     row['mythic_keystone_rating'],
-                    row['creation_datetime']
+                    row['creation_datetime'],
+                    row['run_id']
                 )
                 cursor.execute(sql, values)
             self.connection.commit()

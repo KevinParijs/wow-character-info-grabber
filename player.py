@@ -25,26 +25,5 @@ class Player:
         else:
             print(f"Skipping API call for {self.player_name}. Class not set.")
 
-    def get_player_id(player_name):
-        """Retrieve the player ID from the database based on the player name."""
-        db_handler = DatabaseHandler(host='192.168.1.10', user='dbgrabber', password='DBgrabber123!', database='tww-data')
-        if connection is None:
-            return None
-        
-        try:
-            cursor = connection.cursor(dictionary=True)
-            query = "SELECT player_id FROM players WHERE player_name = %s"
-            cursor.execute(query, (player_name,))
-            result = cursor.fetchone()
-            
-            if result:
-                return result['player_id']
-            else:
-                print(f"Player not found: {player_name}")
-                return None
-        except Error as e:
-            print(f"Error querying the database: {e}")
-            return None
-        finally:
-            cursor.close()
-            connection.close()
+    def grab_player_equipment(self, api_client):
+        char_id, equipment, item_sets = api_client.get_player_equipment(self.player_name, self.realm)
