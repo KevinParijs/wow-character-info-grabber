@@ -50,10 +50,14 @@ class BlizzardAPI:
 
         # https://eu.api.blizzard.com/profile/wow/character/stormscale/khaelitha/equipment?namespace=profile-eu&locale=en_GB&access_token=EURSlT35ZKzBIpYVAgIw6rq2VCEGUPjdE1
         
+        print(url)
+        
         response = requests.get(url)
         if response.status_code ==200:
             data = response.json()
-            char_id = data.get('character', {}).get('id', '0')
+            char_id = {
+                'char_id': data.get('character', {}).get('id', '0')
+            }
 
             equipment = []
             for item in data.get('equipped_items', []):
@@ -78,6 +82,24 @@ class BlizzardAPI:
                     item_info['sockets'].append(socket_info)
 
                 equipment.append(item_info)
+            equipment.append(char_id)
+
+            # Return or store the structured data
+            # print(equipment)
+            return equipment
+        else:
+            print(f"Error fetching equipment for {player_name} on realm {realm}. Status code: {response.status_code}")
+            return 0
+
+    def get_player_item_sets(self, player_name, realm):
+        url = f"https://{self.region}.api.blizzard.com/profile/wow/character/{realm.lower()}/{player_name.lower()}/equipment?namespace=profile-{self.region}&locale=en_GB&access_token={self.access_token}"
+
+        # https://eu.api.blizzard.com/profile/wow/character/stormscale/khaelitha/equipment?namespace=profile-eu&locale=en_GB&access_token=EURSlT35ZKzBIpYVAgIw6rq2VCEGUPjdE1
+        
+        response = requests.get(url)
+        if response.status_code ==200:
+            data = response.json()
+            char_id = data.get('character', {}).get('id', '0')
 
             # Parse equipped item sets
             item_sets = []
@@ -97,13 +119,10 @@ class BlizzardAPI:
                     set_info['items'].append(item_detail)
 
                 item_sets.append(set_info)
+            item_sets.append(char_id)
 
             # Return or store the structured data
-            return {
-                'character_id': char_id,
-                'equipment': equipment,
-                'item_sets': item_sets
-            }
+            return item_sets
         else:
             print(f"Error fetching m+ score for {player_name} on realm {realm}. Status code: {response.status_code}")
             return 0

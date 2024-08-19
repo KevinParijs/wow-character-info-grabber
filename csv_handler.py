@@ -4,16 +4,28 @@ import csv
 import os
 
 class CSVHandler:
-    def read_csv(self, file_path):
+    def read_csv(self, file_path, filter_debug):
         player_info = []
-        try:
-            with open(file_path, 'r', encoding="utf-8") as file:
-                reader = csv.DictReader(file)
-                for row in reader:
-                    player_info.append(row)
-        except FileNotFoundError:
-            print(f"Error: File not found - {file_path}")
-        return player_info
+        if filter_debug == '0':
+            try:
+                with open(file_path, 'r', encoding="utf-8") as file:
+                    reader = csv.DictReader(file)
+                    for row in reader:
+                        player_info.append(row)
+            except FileNotFoundError:
+                print(f"Error: File not found - {file_path}")
+            return player_info
+        else:
+            try:
+                with open(file_path, 'r', encoding="utf-8") as file:
+                    reader = csv.DictReader(file)
+                    for row in reader:
+                        if row['debug'] == '1':
+                            player_info.append(row)
+            except FileNotFoundError:
+                print(f"Error: File not found - {file_path}")
+            return player_info
+
 
     def write_csv(self, file_path, data):
         fieldnames = ['char_id', 'player_name', 'realm', 'class', 'item_level', 'level', 'faction', 'role', 'specialisation', 'race', 'mythic_keystone_rating', 'creation_datetime', 'run_id']

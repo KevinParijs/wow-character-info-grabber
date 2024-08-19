@@ -60,17 +60,33 @@ class DatabaseHandler:
         except Error as e:
             print(f"Error writing to database: {e}")
 
-    def insert_item(conn, item):
-        cursor = conn.cursor()
-        cursor.execute('''
-            INSERT INTO items (item_id, name, item_class, item_subclass, level, quality, quantity, 
-                                modified_appearance_id, transmog_id, creation_timestamp)
-            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-        ''', (
-            item.item_id, item.name, item.item_class, item.item_subclass, item.level, item.quality, 
-            item.quantity, item.modified_appearance_id, item.transmog_id, datetime.now()
-        ))
-        conn.commit()
+    def insert_item(self, item):
+        try:
+            cursor = self.connection.cursor()
+            for row in item:
+                sql = """
+                INSERT INTO items (char_id, item_id, slot_name, quality_name, level_value, item_name, name_description, 
+                                    socket_type, socket_item_name, socket_item_id,socket_display_string)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                """
+                values = (
+                    row['char_id'],
+                    row['item_id'],
+                    row['slot_name'],
+                    row['quality_name'],
+                    row['level_value'],
+                    row['item_name'],
+                    row['name_description'],
+                    row['socket_type'],
+                    row['socket_item_name'],
+                    row['socket_item_id'],
+                    row['socket_display_string']
+                )
+                cursor.execute(sql, values)
+            self.connection.commit()
+            print("Equipment data successfully written to database")
+        except Error as e:
+            print(f"Error writing equipment to database: {e}")
 
     def insert_stats(conn, item_id, stats):
         cursor = conn.cursor()
@@ -111,9 +127,6 @@ class DatabaseHandler:
             VALUES (%s, %s, %s)
         ''', (player_id, item_id, equipped))
         conn.commit()
-
-
-
 
     def close_connection(self):
         if self.connection and self.connection.is_connected():

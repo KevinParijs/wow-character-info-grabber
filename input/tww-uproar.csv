@@ -1,28 +1,28 @@
-player_name,realm,class,role
-Kixdk,Stormscale,Death Knight,Tank
-Telepatic,Stormscale,Paladin,Tank
-Jadee,Stormscale,Druid,Healer
-Mikdiff,Stormscale,Paladin,Healer
-Julian,Stormscale,TBD,Healer
-Naraaya,Draenor,Paladin,Healer
-Spekkies,Stormscale,Shaman,Healer
-Lozoot,Stormscale,Evoker,DPS
-Salmena,Twilight's Hammer,Hunter,DPS
-Respite,Bloodhoof,TBD,DPS
-Endorielle,Stormscale,Mage,DPS
-Kyotetsu,Stormscale,Demon Hunter,DPS
-Seeddy,Stormscale,Mage,DPS
-Nravitsya,Stormscale,Hunter,DPS
-Drexyl,Stormscale,Warlock,DPS
-Khaelitha,Stormscale,Warlock,DPS
-Magnushunter,Stormscale,Hunter,DPS
-Grenm,Stormscale,Rogue,DPS
-Córdula,Stormscale,Death Knight,DPS
-Mattdeamon,Stormscale,Warlock,DPS
-Karadin,Stormscale,Paladin,DPS
-Artix,Stormscale,Paladin,DPS
-Thirtysix,Stormscale,Priest,DPS
-Macamonk,Stormscale,Monk,DPS
-Màzè,Stormscale,Warrior,DPS
-Diawar,Stormscale,Warrior,DPS
-Skausyskaus,Draenor,Priest,DPS
+player_name,realm,class,role,debug
+Kixdk,Stormscale,Death Knight,Tank,0
+Telepatic,Stormscale,Paladin,Tank,0
+Jadee,Stormscale,Druid,Healer,0
+Mikdiff,Stormscale,Paladin,Healer,0
+Julian,Stormscale,TBD,Healer,0
+Naraaya,Draenor,Paladin,Healer,0
+Spekkies,Stormscale,Shaman,Healer,0
+Lozoot,Stormscale,Evoker,DPS,0
+Salmena,Twilight's Hammer,Hunter,DPS,0
+Respite,Bloodhoof,TBD,DPS,0
+Endorielle,Stormscale,Mage,DPS,0
+Kyotetsu,Stormscale,Demon Hunter,DPS,0
+Seeddy,Stormscale,Mage,DPS,0
+Nravitsya,Stormscale,Hunter,DPS,0
+Drexyl,Stormscale,Warlock,DPS,0
+Khaelitha,Stormscale,Warlock,DPS,1
+Magnushunter,Stormscale,Hunter,DPS,0
+Grenm,Stormscale,Rogue,DPS,0
+Córdula,Stormscale,Death Knight,DPS,0
+Mattdeamon,Stormscale,Warlock,DPS,0
+Karadin,Stormscale,Paladin,DPS,0
+Artix,Stormscale,Paladin,DPS,0
+Thirtysix,Stormscale,Priest,DPS,0
+Macamonk,Stormscale,Monk,DPS,0
+Màzè,Stormscale,Warrior,DPS,0
+Diawar,Stormscale,Warrior,DPS,0
+Skausyskaus,Draenor,Priest,DPS,0

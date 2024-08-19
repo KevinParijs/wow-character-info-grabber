@@ -15,16 +15,16 @@ def player_info(api_client, db_handler):
 
     # Read players from CSV
     csv_handler = CSVHandler()
-    players = csv_handler.read_csv("input/tww-uproar.csv")
+    players = csv_handler.read_csv("input/tww-uproar.csv", '0')
     if not players:
         return
 
     player_data = []
-    player_equipment = []
     for player in players:
         try:
             p = Player(player['player_name'], player['realm'], player['class'], player['role'])
             p.update_from_api(api_client)
+            print(f'char_id: {str(p.id)} !!')
             result = hashlib.md5(str(p.id).encode())
             player_data.append({
                 'char_id': result.hexdigest(),
@@ -41,10 +41,6 @@ def player_info(api_client, db_handler):
                 'creation_datetime': p.creation_datetime,
                 'run_id': run_id
             })
-            p.grab_player_equipment(api_client)
-            player_equipment.append({
-                'char_id': p.char_id
-            })
         except:
             print("An error occured during the API call for player name: "+ player['player_name'])
 
@@ -56,10 +52,67 @@ def player_info(api_client, db_handler):
     db_handler.write_to_database(player_data)
     # player_id = Player.get_player_id(player_data['player_name'])
 
-    print('Output process completed!')
+    print('Profile process completed!')
 
-def player_items():
-    return True
+def player_equipment(api_client, db_handler):
+    # Read players from CSV
+    csv_handler = CSVHandler()
+    players = csv_handler.read_csv("input/tww-uproar.csv", '0')
+    if not players:
+        return
+
+    player_equipment = []
+    for player in players:
+        try:
+            p = Player(player['player_name'], player['realm'], player['class'], player['role'])
+            p.grab_player_equipment(api_client)
+            
+            for item in p.equipment:
+                if 'char_id' in item:
+                    char_id_value = item['char_id']
+                    break
+
+            for item in p.equipment:
+                result = hashlib.md5(str(char_id_value).encode())
+                if item['sockets']:  # Check if the item has sockets
+                    for socket in item['sockets']:
+                        player_equipment.append({
+                            'char_id': result.hexdigest(),
+                            'item_id': item['item_id'],
+                            'slot_name': item['slot_name'],
+                            'quality_name': item['quality_name'],
+                            'level_value': item['level_value'],
+                            'item_name': item['item_name'],
+                            'name_description': item['name_description'],
+                            'socket_type': socket['socket_type'],
+                            'socket_item_name': socket['socket_item_name'],
+                            'socket_item_id': socket['socket_item_id'],
+                            'socket_display_string': socket['socket_display_string']
+                        })
+                    #print(player_equipment)
+                else:
+                    # If no sockets, add the item with empty socket fields
+                    player_equipment.append({
+                        'char_id': result.hexdigest(),
+                        'item_id': item['item_id'],
+                        'slot_name': item['slot_name'],
+                        'quality_name': item['quality_name'],
+                        'level_value': item['level_value'],
+                        'item_name': item['item_name'],
+                        'name_description': item['name_description'],
+                        'socket_type': '',  # Empty fields for no socket
+                        'socket_item_name': '',
+                        'socket_item_id': 0,
+                        'socket_display_string': ''
+                    })
+                    #print(player_equipment)
+        except:
+            print("An error occured during the API call for player name: "+ player['player_name'])
+
+    # Write data to MariaDB
+    db_handler.insert_item(player_equipment)
+
+    print('Equipment process completed!')
 
 def main():
     # Load environment variables
@@ -74,9 +127,8 @@ def main():
     # Grab player information
     db_handler = DatabaseHandler(host='192.168.1.10', user=mariadb_user, password=mariadb_pwd, database='tww-data')
     player_info(api_client, db_handler)
+    player_equipment(api_client, db_handler)
     db_handler.close_connection()
-
-    
 
 if __name__ == "__main__":
     main()
