@@ -30,7 +30,7 @@ class BlizzardAPI:
 
     def get_player_item_level(self, player_name, realm):
         url = f"https://{self.region}.api.blizzard.com/profile/wow/character/{realm.lower()}/{player_name.lower()}?namespace=profile-{self.region}&locale=en_GB&access_token={self.access_token}"
-        print(url)
+        # print(url)
         response = requests.get(url)
         if response.status_code == 200:
             data = response.json()

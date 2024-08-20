@@ -21,7 +21,9 @@ class DatabaseHandler:
                 database=self.database
             )
             if connection.is_connected():
+                print("-----------------------------")
                 print("Connected to MariaDB database")
+                print("-----------------------------")
                 return connection
         except Error as e:
             print(f"Error connecting to MariaDB database: {e}")

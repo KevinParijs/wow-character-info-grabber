@@ -24,7 +24,8 @@ def player_info(api_client, db_handler):
         try:
             p = Player(player['player_name'], player['realm'], player['class'], player['role'])
             p.update_from_api(api_client)
-            print(f'char_id: {str(p.id)} !!')
+            # print(f'char_id: {str(p.id)} !!')
+            print(f"Grabbing player info for {p.player_name} ({str(p.id)}) !")
             result = hashlib.md5(str(p.id).encode())
             player_data.append({
                 'char_id': result.hexdigest(),
@@ -42,7 +43,7 @@ def player_info(api_client, db_handler):
                 'run_id': run_id
             })
         except:
-            print("An error occured during the API call for player name: "+ player['player_name'])
+            print("An error occured during the API call for player profile: "+ player['player_name'])
 
     # Write data to CSV
     output_file_path = "output/player_data.csv"
@@ -50,7 +51,6 @@ def player_info(api_client, db_handler):
 
     # Write data to MariaDB
     db_handler.write_to_database(player_data)
-    # player_id = Player.get_player_id(player_data['player_name'])
 
     print('Profile process completed!')
 
@@ -66,16 +66,27 @@ def player_equipment(api_client, db_handler):
         try:
             p = Player(player['player_name'], player['realm'], player['class'], player['role'])
             p.grab_player_equipment(api_client)
-            
+
+            # Detailed debug information
+            # print(f"Player: {player['player_name']}, Equipment: {p.equipment}")
+
+            # print(p.equipment)
+
             for item in p.equipment:
                 if 'char_id' in item:
                     char_id_value = item['char_id']
                     break
 
-            for item in p.equipment:
-                result = hashlib.md5(str(char_id_value).encode())
-                if item['sockets']:  # Check if the item has sockets
-                    for socket in item['sockets']:
+            result = hashlib.md5(str(char_id_value).encode())
+            print(result.hexdigest())
+
+            filtered_equipment = [item for item in p.equipment if 'item_id' in item]
+            for item in filtered_equipment:
+                
+                sockets = item.get('sockets')
+
+                if sockets:  # Check if the item has sockets
+                    for socket in sockets:
                         player_equipment.append({
                             'char_id': result.hexdigest(),
                             'item_id': item['item_id'],
@@ -89,7 +100,7 @@ def player_equipment(api_client, db_handler):
                             'socket_item_id': socket['socket_item_id'],
                             'socket_display_string': socket['socket_display_string']
                         })
-                    #print(player_equipment)
+                    # print(player_equipment)
                 else:
                     # If no sockets, add the item with empty socket fields
                     player_equipment.append({
@@ -105,9 +116,10 @@ def player_equipment(api_client, db_handler):
                         'socket_item_id': 0,
                         'socket_display_string': ''
                     })
-                    #print(player_equipment)
-        except:
-            print("An error occured during the API call for player name: "+ player['player_name'])
+                    # print(player_equipment)
+        except Exception as e:
+            print(f"Error details: {str(e)}")
+            # print("An error occured during the API call for player equipment: "+ player['player_name'])
 
     # Write data to MariaDB
     db_handler.insert_item(player_equipment)
