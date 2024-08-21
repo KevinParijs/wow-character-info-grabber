@@ -3,6 +3,7 @@ import requests
 import csv
 import os
 import hashlib
+import time
 from datetime import datetime
 
 from blizzard_api import BlizzardAPI
@@ -10,8 +11,17 @@ from csv_handler import CSVHandler
 from db_handler import DatabaseHandler
 from player import Player
 
+# Load environment variables
+mariadb_user = os.environ.get('mariadb_syno_user')
+mariadb_pwd = os.environ.get('mariadb_syno_pwd')
+client_id = os.environ.get('bnet_client_id')
+client_secret = os.environ.get('bnet_client_secret')
+
+
 def player_info(api_client, db_handler):
     run_id = datetime.today().strftime('%Y%m%d%H%M')
+
+    print(f"Collecting player information through Blizzard API...")
 
     # Read players from CSV
     csv_handler = CSVHandler()
@@ -25,7 +35,7 @@ def player_info(api_client, db_handler):
             p = Player(player['player_name'], player['realm'], player['class'], player['role'])
             p.update_from_api(api_client)
             # print(f'char_id: {str(p.id)} !!')
-            print(f"Grabbing player info for {p.player_name} ({str(p.id)}) !")
+            print(f"--> Grabbing player info for {p.player_name} ({str(p.id)}) !")
             result = hashlib.md5(str(p.id).encode())
             player_data.append({
                 'char_id': result.hexdigest(),
@@ -52,9 +62,11 @@ def player_info(api_client, db_handler):
     # Write data to MariaDB
     db_handler.write_to_database(player_data)
 
-    print('Profile process completed!')
+    print(f"Collecting player information completed!")
 
 def player_equipment(api_client, db_handler):
+
+    print(f"Collecting player equipment through Blizzard API...")
     # Read players from CSV
     csv_handler = CSVHandler()
     players = csv_handler.read_csv("input/tww-uproar.csv", '0')
@@ -78,7 +90,7 @@ def player_equipment(api_client, db_handler):
                     break
 
             result = hashlib.md5(str(char_id_value).encode())
-            print(result.hexdigest())
+            print(f"--> Grabbing player equipment for {p.player_name} ({char_id_value})")
 
             filtered_equipment = [item for item in p.equipment if 'item_id' in item]
             for item in filtered_equipment:
@@ -124,15 +136,9 @@ def player_equipment(api_client, db_handler):
     # Write data to MariaDB
     db_handler.insert_item(player_equipment)
 
-    print('Equipment process completed!')
+    print(f"Collecting player equipment completed!")
 
 def main():
-    # Load environment variables
-    mariadb_user = os.environ.get('mariadb_syno_user')
-    mariadb_pwd = os.environ.get('mariadb_syno_pwd')
-    client_id = os.environ.get('bnet_client_id')
-    client_secret = os.environ.get('bnet_client_secret')
-
     # Instantiate API client
     api_client = BlizzardAPI(client_id, client_secret)
 
@@ -142,5 +148,25 @@ def main():
     player_equipment(api_client, db_handler)
     db_handler.close_connection()
 
+def truncate_tables():
+    db_handler = DatabaseHandler(host='192.168.1.10', user=mariadb_user, password=mariadb_pwd, database='tww-data')
+    tables = ['players','items']
+    db_handler.truncate_tables(tables)
+    db_handler.close_connection()
+
+def menu():
+    print("What do you want to do?")
+    print("1. Grab player & equipment data through the Blizzard API")
+    print("2. Truncate players & equipment tables from the database.")
+    choice = input("Enter choice: ")
+    
+    match choice:
+        case "1":
+            main()
+        case "2":
+            truncate_tables()
+        case _:
+            print(f"This is an invalid choice!")
+
 if __name__ == "__main__":
-    main()
+    menu()

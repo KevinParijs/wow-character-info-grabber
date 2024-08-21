@@ -50,7 +50,7 @@ class BlizzardAPI:
 
         # https://eu.api.blizzard.com/profile/wow/character/stormscale/khaelitha/equipment?namespace=profile-eu&locale=en_GB&access_token=EURSlT35ZKzBIpYVAgIw6rq2VCEGUPjdE1
         
-        print(url)
+        # print(url)
         
         response = requests.get(url)
         if response.status_code ==200:
@@ -88,7 +88,7 @@ class BlizzardAPI:
             # print(equipment)
             return equipment
         else:
-            print(f"Error fetching equipment for {player_name} on realm {realm}. Status code: {response.status_code}")
+            print(f"ERROR: Error fetching equipment for {player_name} on realm {realm}. Status code: {response.status_code}")
             return 0
 
     def get_player_item_sets(self, player_name, realm):

@@ -130,6 +130,20 @@ class DatabaseHandler:
         ''', (player_id, item_id, equipped))
         conn.commit()
 
+    def truncate_tables(self, tables):
+        if not self.connection:
+            print("No database connection available")
+            return
+        try:
+            cursor = self.connection.cursor()
+            for table in tables:
+                query = f"truncate table {table}"
+                cursor.execute(query)
+                print(f"Executed query: {query}")
+            self.connection.commit()
+        except Error as e:
+            print(f"Error executing truncate query: {e}")
+    
     def close_connection(self):
         if self.connection and self.connection.is_connected():
             self.connection.close()

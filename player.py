@@ -26,17 +26,16 @@ class Player:
             self.id, self.item_level, self.level, self.faction, self.specialisation, self.race = api_client.get_player_item_level(self.player_name, self.realm)
             self.mythic_score = api_client.get_player_mythic_keystone_rating(self.player_name, self.realm)
         else:
-            print(f"Skipping Profile API call for {self.player_name}. Class not set.")
+            print(f"ERROR: Skipping Profile API call for {self.player_name}. Class not set.")
 
     def grab_player_equipment(self, api_client):
         if self.player_class != 'TBD':
             self.equipment = api_client.get_player_equipment(self.player_name, self.realm)
-            # print(self.equipment)
         else:
-            print(f"Skipping Equipment API call for {self.player_name}. Class not set.")
+            print(f"ERROR: Skipping Equipment API call for {self.player_name}. Class not set.")
 
     def grab_player_item_sets(self, api_client):
         if self.player_class != 'TBD':
             self.item_sets = api_client.get_player_item_sets(self.player_name, self.realm)
         else:
-            print(f"Skipping Equipment API call for {self.player_name}. Class not set.")
+            print(f"ERROR: Skipping Equipment API call for {self.player_name}. Class not set.")
