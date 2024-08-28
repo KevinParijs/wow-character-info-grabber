@@ -29,7 +29,7 @@ class DatabaseHandler:
             print(f"Error connecting to MariaDB database: {e}")
             return None
 
-    def write_to_database(self, data):
+    def insert_player(self, data, current_datetime):
         if not self.connection:
             print("No database connection available")
             return
@@ -53,7 +53,7 @@ class DatabaseHandler:
                     row['specialisation'],
                     row['race'],
                     row['mythic_keystone_rating'],
-                    row['creation_datetime'],
+                    current_datetime,
                     row['run_id']
                 )
                 cursor.execute(sql, values)
@@ -62,14 +62,14 @@ class DatabaseHandler:
         except Error as e:
             print(f"Error writing to database: {e}")
 
-    def insert_item(self, item):
+    def insert_item(self, item, current_datetime):
         try:
             cursor = self.connection.cursor()
             for row in item:
                 sql = """
                 INSERT INTO items (char_id, item_id, slot_name, quality_name, level_value, item_name, name_description, 
-                                    socket_type, socket_item_name, socket_item_id,socket_display_string)
-                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                                    socket_type, socket_item_name, socket_item_id,socket_display_string, creation_datetime)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
                 """
                 values = (
                     row['char_id'],
@@ -82,7 +82,8 @@ class DatabaseHandler:
                     row['socket_type'],
                     row['socket_item_name'],
                     row['socket_item_id'],
-                    row['socket_display_string']
+                    row['socket_display_string'],
+                    current_datetime
                 )
                 cursor.execute(sql, values)
             self.connection.commit()

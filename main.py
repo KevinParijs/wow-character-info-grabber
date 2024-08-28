@@ -17,6 +17,8 @@ mariadb_pwd = os.environ.get('mariadb_syno_pwd')
 client_id = os.environ.get('bnet_client_id')
 client_secret = os.environ.get('bnet_client_secret')
 
+# Current datetime
+now = datetime.now()
 
 def player_info(api_client, db_handler):
     run_id = datetime.today().strftime('%Y%m%d%H%M')
@@ -60,7 +62,7 @@ def player_info(api_client, db_handler):
     csv_handler.write_csv(output_file_path, player_data)
 
     # Write data to MariaDB
-    db_handler.write_to_database(player_data)
+    db_handler.insert_player(player_data, now)
 
     print(f"Collecting player information completed!")
 
@@ -134,7 +136,7 @@ def player_equipment(api_client, db_handler):
             # print("An error occured during the API call for player equipment: "+ player['player_name'])
 
     # Write data to MariaDB
-    db_handler.insert_item(player_equipment)
+    db_handler.insert_item(player_equipment, now)
 
     print(f"Collecting player equipment completed!")
 
@@ -164,6 +166,7 @@ def menu():
         case "1":
             main()
         case "2":
+            #print(f"Disabled to prevent oepsies!") 
             truncate_tables()
         case _:
             print(f"This is an invalid choice!")
