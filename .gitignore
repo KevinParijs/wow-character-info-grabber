@@ -7,5 +7,5 @@
 
 # Ignore repo
 __pycache__
-/backup/
-/output/
+backup/
+output/
